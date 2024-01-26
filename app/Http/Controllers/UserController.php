@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Event;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    
+
     // public function show($id_user)
     // {
 
@@ -21,5 +25,5 @@ class UserController extends Controller
 
     // }
 
-    
+
 }

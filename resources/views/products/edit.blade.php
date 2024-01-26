@@ -1,3 +1,5 @@
+@extends('layouts.app')
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,15 +10,16 @@
     <title>Document</title>
 
 </head>
+@section('content')
 
 <body>
     <div class="container">
-        <div class="list-event">
+        <div class="card">
             <h1>Modifica Prodotto</h1>
 
             <a href="{{ route('products.show', ['eventId' => $event->id, 'productId' => $product->id]) }}">Torna ai dettagli del prodotto</a>
 
-            <form method="POST" action="{{ route('products.update', ['eventId' => $event->id, 'productId' => $product->id]) }}">
+            <form class="row g-3" method="POST" action="{{ route('products.update', ['eventId' => $event->id, 'productId' => $product->id]) }}">
                 @csrf
 
                 <div class="input-event">
@@ -46,7 +49,9 @@
             </form>
         </div>
 
+
     </div>
+    @endsection
 </body>
 
 </html>

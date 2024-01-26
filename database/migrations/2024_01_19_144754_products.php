@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
-            $table->float('price', 4);
+            $table->float('price', 6,2);
             $table->string('materials');
-            $table->float('weight', 4);
+            $table->float('weight', 4,2);
             $table->string('description');
             $table->timestamps();
-            $table->foreignId('event_id')->constrained('events');
+            $table->foreignId('event_id')->constrained($table = 'events', $column = 'id');
         });
     }
  

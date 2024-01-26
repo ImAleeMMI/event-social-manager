@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Product;
 use App\Http\Requests\ProductRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 
@@ -43,20 +44,39 @@ class ProductController extends Controller
 
     public function edit($eventId, $productId)
     {
+        $userAuth = Auth::user();
         $event = Event::findOrFail($eventId);
         $product = Product::where('id', $productId)->where('event_id', $eventId)->firstOrFail();
-        return view('products.edit', compact('event', 'product'));
+
+        if ($userAuth->id === $event->user_id) {
+            return view('products.edit', compact('event', 'product'));
+        }
+        return redirect()->route('show' , ['id' => $event->id]);
     }
 
     public function update(ProductRequest $request, $eventId, $productId)
     {
+        $userAuth = Auth::user();
+
+        $event = Event::findOrFail($eventId);
+
         $data = $request->validated();
-        Product::where('id', $productId)->where('event_id', $eventId)->update($data);
-        return redirect()->route('products.show', ['eventId' => $eventId, 'productId' => $productId]);
+
+        if ($userAuth->id === $event->user_id) {
+            $product = Product::find($productId)->update($data);
+            return view('show', compact('event', 'product'));
+        }
+        return redirect()->route('show',['id' => $eventId], ['id' => $productId]);
     }
 
     public function destroy($eventId, $productId)
     {
+        $userAuth = Auth::user();
+        $event = Event::findOrFail($eventId);
+
+        if ($userAuth->id === $event->user_id) {
+        }
+
         Product::where('id', $productId)->where('event_id', $eventId)->delete();
         return redirect()->route('products.index', ['id' => $eventId]);
     }

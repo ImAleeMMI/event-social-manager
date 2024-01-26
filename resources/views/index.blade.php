@@ -1,3 +1,4 @@
+@extends('layouts.app')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,36 +9,40 @@
     <title>Lista Eventi</title>
 </head>
 
-<header>
-    <div class="header">
-        <a href="#" class="logo">Logo Eventi</a>
-        <div class="header-right">
-            <a class="active" href="#home">Home</a>
-            <a href="#contact">Servizi</a>
-            <a href="#about">Chi siamo</a>
-            <a href="#about">Contatti</a>
-        </div>
-    </div>
-</header>
 
 <body>
+    @section('content')
     <div class="container">
-        <div class="title">Lista degli eventi</div>
-        <div class="list-event">
-            <ul>
-                @foreach($events as $event)
-                <li>
-                    <a class="event-name" href="{{ route('show', ['id' => $event->id]) }}">
-                        {{ $event->name }}
-                    </a>
-                </li>
-                @endforeach
-            </ul>
-            <div class="link">
-                <a href="{{ route('create') }}">Crea nuovo evento</a>
+        <div class="text-center fs-2 title">Lista degli eventi</div>
+    </div>
+    <div class="link">
+        <a href="{{ route('create') }}" class="btn btn-primary">Crea nuovo evento</a>
+    </div>
+    
+    <div class="container justify-content-evently flex-wrap d-flex flex-row text-center">
+        @foreach($events as $event)
+        <div class="card" style="background: white;margin:20px;">
+            <div class="card-body">
+                
+                
+                <h5 class="card-title">{{ $event->name  }}</h5>
+                <a href="{{ route('show', ['id' => $event->id]) }}" class="btn btn-light">Visualizza</a>
+                
             </div>
         </div>
+        @endforeach
     </div>
+    @endsection
 </body>
 
 </html>
+
+<style>
+    .card {
+        width: 15%;
+        padding: 20px 10px;
+    }
+    .title{
+        color: #fff;
+    }
+</style>
