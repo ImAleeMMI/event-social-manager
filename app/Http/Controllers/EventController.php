@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EventRequest;
-
+use App\Mail\UnSubscribe;
+use App\Mail\Welcome;
 use App\Models\Event;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Termwind\Components\Raw;
+
+use Illuminate\Support\Facades\Mail;
 
 class EventController extends Controller
 {
@@ -75,7 +78,6 @@ class EventController extends Controller
     public function destroy($id)
     {
         $userAuth = Auth::user();
-
         $event = Event::findOrFail($id);
 
         if ($userAuth->id === $event->user_id) {
@@ -89,6 +91,7 @@ class EventController extends Controller
             return view('index', compact('events'));
         }
     }
+
     public function subscription($id)
     {
         $userAuth = Auth::user();
@@ -102,7 +105,12 @@ class EventController extends Controller
                 'exist' => 'Ti sei già iscritto'
             ]);
         }
+
         $event->users()->attach($userAuth->id);
+
+        $eventOwner = $event->user;
+        Mail::to($eventOwner->email)->send(new Welcome);
+
         return redirect()->route('show', ['id' => $id]);
     }
 
@@ -122,6 +130,9 @@ class EventController extends Controller
         }
 
         $event->users()->detach($userAuth->id);
+
+        $eventOwner = $event->user;
+        Mail::to($eventOwner->email)->send(new UnSubscribe);
 
         return redirect()->route('show', ['id' => $id]);
     }

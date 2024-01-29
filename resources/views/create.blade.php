@@ -12,8 +12,7 @@
 @section('content')
 
 <body>
-    <div class="image"></div>
-    <div class="container">
+    <div class="container" >
         <div class="list-event">
             @if ($errors->any())
             <div class="alert alert-danger">
@@ -25,18 +24,17 @@
             </div>1
             @endif
 
-            <div class="card">
+            <div class="card text-center" style="background: white;">
                 <p class="title">Crea il tuo evento</p>
                 <form class="row g-3" action="/events" method="POST">
                     @csrf
-                    <div class="col-md-10">
+                    <div class="col-md-10 ">
                         <label>Nome</label>
                         <input class="form-control" type="text" name="name" required>
                     </div>
-                    <div class="input-group mb-2">
+                    <div class="col-md-2">
                         <label>Prezzo</label>
                         <input class="form-control" type="text" name="price" required>
-                        <span class="input-group-text">$</span>
                     </div>
                     <div class="col-md-12">
                         <label>Via</label>

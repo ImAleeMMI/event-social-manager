@@ -51,9 +51,8 @@
                     <label for="">Descrizione</label>
                     <textarea class="form-control" type="text" name="description" value="{{ old('description' , $event->description) }}" required></textarea>
                 </div>
-                <div class="">
+                <div>
                     <button class="btn btn-primary" type="submit">Aggiorna Evento</button>
-                    
                 </div>
             </form>
             <form action="{{ route('index') }}" method="POST">

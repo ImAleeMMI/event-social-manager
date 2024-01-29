@@ -13,11 +13,9 @@
 <body>
 @section('content')
     <div class="container">
-        <div class="card">
+        <div class="card text-center" style="background: #fff;">
             <div class="list-event">
-                <h1>Dettagli Prodotto</h1>
-
-                <a href="{{ route('products.index', ['eventId' => $event->id]) }}">Torna ai prodotti</a>
+                <h1 class="title">Dettagli Prodotto</h1>
                 <div>
                     <p>Nome del Prodotto: {{ $product->title }}</p>
                     <p>Prezzo: {{ $product->price }}</p>
@@ -25,7 +23,11 @@
                     <p>Peso: {{ $product->weight }}</p>
                     <p>Descrizione: {{ $product->description }}</p>
                 </div>
-                <a href="{{ route('products.edit', ['eventId' => $event->id, 'productId' => $product->id]) }}" class="btn">Modifica Prodotto</a>
+                <div>
+                    <a href="{{ route('products.edit', ['eventId' => $event->id, 'productId' => $product->id]) }}" class="btn btn-primary">Modifica Prodotto</a>
+                    <a href="{{ route('products.index', ['eventId' => $event->id]) }}" class="btn btn-light">Torna ai prodotti</a>
+                </div>
+                
             </div>
         </div>
     </div>

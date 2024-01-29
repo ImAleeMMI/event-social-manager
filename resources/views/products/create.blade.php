@@ -13,36 +13,36 @@
 <body>
     @section('content')
     <div class="container">
-        <div class="card">
+        <div class="card text-center" style="background: #fff;">
             <div class="title">
                 <p>Crea un nuovo Prodotto per l'Evento: {{ $event->name }}</p>
             </div>
-            <form class="form" method="POST" action="{{ route('products.store', ['id' => $event->id]) }}">
+            <form class="row g-3" method="POST" action="{{ route('products.store', ['id' => $event->id]) }}">
                 @csrf
 
-                <div class="input-event">
+                <div class="col-md-10">
                     <label for="title">Titolo del Prodotto:</label>
-                    <input type="text" name="title" class="form-control" style="background: white;" required>
+                    <input type="text" name="title" class="form-control" required>
                 </div>
 
-                <div class="input-event">
+                <div class="col-md-2">
                     <label for="price">Prezzo:</label>
-                    <input type="number" name="price" class="form-control" style="background: white;" required>
+                    <input type="number" name="price" class="form-control" required>
                 </div>
 
-                <div class="input-event">
+                <div class="col-md-6">
                     <label for="price">Materiale:</label>
-                    <input type="text" name="materials" class="form-control" style="background: white;" required>
+                    <input type="text" name="materials" class="form-control" required>
                 </div>
 
-                <div class="input-event">
+                <div class="col-md-6">
                     <label for="price">Peso:</label>
-                    <input type="text" name="weight" class="form-control" style="background: white;" required>
+                    <input type="text" name="weight" class="form-control" required>
                 </div>
 
-                <div class="input-event">
+                <div class="col-md-12">
                     <label for="price">Descrizione:</label>
-                    <textarea type="text" name="description" class="form-control" style="background: white;" required></textarea>
+                    <textarea type="text" name="description" class="form-control" required></textarea>
                 </div>
 
                 <div>
